@@ -19,7 +19,8 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 repositories {
-    maven { url "https://thedarkcolour.github.io/KotlinForForge"}
+    maven { url "https://thedarkcolour.github.io/KotlinForForge" }
+    maven { url 'https://maven.tterrag.com/' }
 }
 
 version = '1.0'
