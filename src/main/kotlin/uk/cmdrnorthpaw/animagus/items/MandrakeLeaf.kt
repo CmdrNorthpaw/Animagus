@@ -2,6 +2,7 @@ package uk.cmdrnorthpaw.animagus.items
 
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.Entity
+import net.minecraft.entity.item.ItemEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Food
 import net.minecraft.item.Item
@@ -18,18 +19,26 @@ class MandrakeLeaf : Item(Properties()
         .food(Food.Builder()
                 .fastToEat()
                 .hunger(1)
-                .saturation(1F)
+                .saturation(3F)
                 .build())
         .maxStackSize(16)
 ) {
     override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, p_77663_4_: Int, p_77663_5_: Boolean) {
         val tag = stack.tag ?: CompoundNBT()
         val time = tag.getInt("age")
-        if (entity !is PlayerEntity) return
+        if (entity !is PlayerEntity || tag.getString("currentOwner") == entity.cachedUniqueIdString) { tag.putInt("age", 0); return }
         if (time < 192000) {
-            tag.putInt("age", time+1);
+            tag.putInt("age", time+1)
+            tag.putString("currentOwner", entity.cachedUniqueIdString)
             stack.tag = tag
         }
+    }
+
+    override fun onEntityItemUpdate(stack: ItemStack?, entity: ItemEntity?): Boolean {
+        if (stack == null) return false
+        val tag = stack.tag ?: CompoundNBT()
+        tag.putInt("age", 0)
+        return true
     }
 
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<ITextComponent>, flagIn: ITooltipFlag) {
