@@ -4,5 +4,5 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 
 interface AnimagusCatalyst {
-    fun <T: Entity> getTargetEntity(): EntityType<T>
+    val targetEntity: EntityType<Entity>
 }
