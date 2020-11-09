@@ -35,10 +35,13 @@ class MandrakeLeaf : Item(Properties()
     }
 
     override fun onEntityItemUpdate(stack: ItemStack?, entity: ItemEntity?): Boolean {
-        if (stack == null) return false
-        val tag = stack.tag ?: CompoundNBT()
-        tag.putInt("age", 0)
-        return true
+        if (entity == null || stack == null) return false
+        else if (entity.isAddedToWorld) {
+            val tag = stack.tag ?: CompoundNBT()
+            tag.putInt("age", 0)
+            stack.tag = tag
+        }
+        return false
     }
 
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<ITextComponent>, flagIn: ITooltipFlag) {
