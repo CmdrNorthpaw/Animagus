@@ -13,6 +13,7 @@ import kotlin.reflect.full.memberProperties
 
 @Mod.EventBusSubscriber
 object Registry {
+    @JvmStatic
     @SubscribeEvent
     fun registerItems(event: RegistryEvent.Register<Item>) = AnimagusItems::class.memberProperties.forEach { item ->
         if (item.returnType == Item::class.createType()) event.registry.register(item.get(AnimagusItems) as Item)
