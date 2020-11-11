@@ -12,10 +12,11 @@ import net.minecraft.nbt.CompoundNBT
 import net.minecraft.nbt.INBT
 import net.minecraft.util.text.*
 import net.minecraft.world.World
+import uk.cmdrnorthpaw.animagus.misc.AnimagusCreativeTab
 import java.io.DataOutputStream
 
 class MandrakeLeaf : Item(Properties()
-        .group(ItemGroup.FOOD)
+        .group(AnimagusCreativeTab)
         .food(Food.Builder()
                 .fastToEat()
                 .hunger(1)
