@@ -8,6 +8,6 @@ import uk.cmdrnorthpaw.animagus.misc.AnimagusCreativeTab
 
 object AnimagusItems {
     val MANDRAKE_LEAF = MandrakeLeaf()
-
     val CAT_HAIR = Item(Item.Properties().group(AnimagusCreativeTab))
+    val CHRYSALIS = Item(Item.Properties().group(AnimagusCreativeTab))
 }
