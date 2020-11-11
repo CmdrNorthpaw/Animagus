@@ -23,5 +23,10 @@ enum class Catalysts(type: EntityType<out LivingEntity>, vararg items: Item) {
     SHEEP(EntityType.SHEEP, Items.WHITE_WOOL, Items.BROWN_WOOL, Items.BLUE_WOOL, Items.BLUE_WOOL, Items.LIGHT_BLUE_WOOL, Items.GRAY_WOOL, Items.LIGHT_GRAY_WOOL, Items.BLACK_WOOL, Items.CYAN_WOOL, Items.GREEN_WOOL, Items.ORANGE_WOOL, Items.LIME_WOOL, Items.RED_WOOL, Items.YELLOW_WOOL, Items.PURPLE_WOOL, Items.MAGENTA_WOOL, Items.PINK_WOOL),
 
     PARROT(EntityType.PARROT, Items.COOKIE),
-    PANDA(EntityType.PANDA, Items.BAMBOO)
+    PANDA(EntityType.PANDA, Items.BAMBOO),
+
+    SNOW_GOLEM(EntityType.SNOW_GOLEM, Items.SNOWBALL),
+    IRON_GOLEM(EntityType.IRON_GOLEM, Items.ANVIL),
+
+    RABBIT(EntityType.RABBIT, Items.GOLDEN_CARROT, Items.RABBIT_FOOT)
 }
