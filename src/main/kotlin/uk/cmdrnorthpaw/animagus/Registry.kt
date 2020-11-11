@@ -13,16 +13,8 @@ import kotlin.reflect.full.memberProperties
 
 @Mod.EventBusSubscriber
 object Registry {
-    private fun registerBlock(block: Block, event: RegistryEvent.Register<Block>) = event.registry.register(block)
-    private fun registerItem(item: Item, event: RegistryEvent.Register<Item>) = event.registry.register(item)
-
     @SubscribeEvent
-    fun registerItems(event: RegistryEvent.Register<Item>) {
-        for (item in AnimagusItems::class.memberProperties) {
-            if (item.returnType == Item::class.createType()) registerItem(item.get(AnimagusItems) as Item, event)
-        }
+    fun registerItems(event: RegistryEvent.Register<Item>) = AnimagusItems::class.memberProperties.forEach { item ->
+        if (item.returnType == Item::class.createType()) event.registry.register(item.get(AnimagusItems) as Item)
     }
-
-    @SubscribeEvent
-    fun registerBlocks(event: RegistryEvent.Register<Block>) { TODO("Need to wait until I create any blocks") }
 }
