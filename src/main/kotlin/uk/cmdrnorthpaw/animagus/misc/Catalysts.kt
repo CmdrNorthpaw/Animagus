@@ -13,6 +13,9 @@ enum class Catalysts(type: EntityType<out LivingEntity>, vararg items: Item) {
 
     SALMON(EntityType.SALMON, Items.SALMON),
     COD(EntityType.COD, Items.COD),
+    TROPICAL_FISH(EntityType.TROPICAL_FISH, Items.TROPICAL_FISH),
+    SQUID(EntityType.SQUID, Items.INK_SAC),
+    TURTLE(EntityType.TURTLE, Items.SCUTE),
 
     CHICKEN(EntityType.CHICKEN, Items.EGG),
     COW(EntityType.COW, Items.LEATHER),
