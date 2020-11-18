@@ -16,6 +16,9 @@ object Animagus {
     init {
         registerEvent(Setup::clientSetup)
         registerEvent(Setup::commonSetup)
+
+        Registry.Items.registry.register(FMLJavaModLoadingContext.get().modEventBus)
+
     }
 }
 
