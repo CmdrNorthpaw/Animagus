@@ -11,28 +11,17 @@ import kotlin.reflect.full.hasAnnotation
 import kotlin.reflect.full.memberProperties
 
 class AnimagusRecipeHandler(generator: DataGenerator) : RecipeProvider(generator) {
-    override fun registerRecipes(consumer: Consumer<IFinishedRecipe>) = AnimagusRecipes::class.memberProperties.forEach { recipe ->
-        if (recipe.hasAnnotation<Recipe>() && recipe.returnType == ShapedRecipeBuilder::class.createType()) {
-            val recipeBuilder = recipe.get(AnimagusRecipes) as ShapelessRecipeBuilder
-            recipeBuilder.build(consumer)
-        } else if (recipe.hasAnnotation<Recipe>() && recipe.returnType == ShapelessRecipeBuilder::class.createType()) {
-            val recipeBuilder = recipe.get(AnimagusRecipes) as ShapelessRecipeBuilder
-            recipeBuilder.build(consumer)
-        }
+    override fun registerRecipes(consumer: Consumer<IFinishedRecipe>) {
+        Recipes.crystalPhial.build(consumer)
+    }
 
+    object Recipes {
+        private const val modid = Animagus.MODID
+        val crystalPhial: ShapedRecipeBuilder = ShapedRecipeBuilder.shapedRecipe(AnimagusItems.PHIAL)
+                .patternLine(" x ")
+                .patternLine(" x ")
+                .patternLine(" x ")
+                .key('x', Tags.Items.GLASS)
+                .setGroup(modid)
     }
 }
-
-private object AnimagusRecipes {
-    private val id = Animagus.MODID
-    @Recipe
-    val crystalPhial: ShapedRecipeBuilder = ShapedRecipeBuilder.shapedRecipe(AnimagusItems.PHIAL)
-            .patternLine(" x ")
-            .patternLine(" x ")
-            .patternLine(" x ")
-            .key('x', Tags.Items.GLASS)
-            .setGroup(id)
-}
-
-@Target(AnnotationTarget.PROPERTY)
-private annotation class Recipe
