@@ -17,7 +17,7 @@ class AnimagusRecipeHandler(generator: DataGenerator) : RecipeProvider(generator
 
     object Recipes {
         private const val modid = Animagus.MODID
-        val crystalPhial: ShapedRecipeBuilder = ShapedRecipeBuilder.shapedRecipe(AnimagusItems.PHIAL)
+        val crystalPhial: ShapedRecipeBuilder = ShapedRecipeBuilder.shapedRecipe(AnimagusItems.PHIAL.get())
                 .patternLine(" x ")
                 .patternLine(" x ")
                 .patternLine(" x ")

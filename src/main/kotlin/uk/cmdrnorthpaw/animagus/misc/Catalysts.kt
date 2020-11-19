@@ -8,7 +8,7 @@ import net.minecraft.item.Items
 import uk.cmdrnorthpaw.animagus.items.AnimagusItems
 
 enum class Catalysts(type: EntityType<out LivingEntity>, vararg items: Item) {
-    CAT(EntityType.CAT, AnimagusItems.CAT_HAIR),
+    CAT(EntityType.CAT, AnimagusItems.CAT_HAIR.get()),
     DOG(EntityType.WOLF, Items.BONE),
 
     SALMON(EntityType.SALMON, Items.SALMON),

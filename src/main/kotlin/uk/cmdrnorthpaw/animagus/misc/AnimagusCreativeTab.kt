@@ -5,5 +5,5 @@ import net.minecraft.item.ItemStack
 import uk.cmdrnorthpaw.animagus.items.AnimagusItems
 
 object AnimagusCreativeTab: ItemGroup("Animagus") {
-    override fun createIcon(): ItemStack = ItemStack(AnimagusItems.MANDRAKE_LEAF, 1)
+    override fun createIcon(): ItemStack = ItemStack(AnimagusItems.MANDRAKE_LEAF.get(), 1)
 }

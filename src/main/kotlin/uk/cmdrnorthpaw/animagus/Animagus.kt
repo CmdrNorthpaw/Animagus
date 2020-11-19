@@ -6,6 +6,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext
 import org.apache.logging.log4j.LogManager
+import uk.cmdrnorthpaw.animagus.items.AnimagusItems
 import java.util.function.Consumer
 
 @Mod(Animagus.MODID)
@@ -17,8 +18,7 @@ object Animagus {
         registerEvent(Setup::clientSetup)
         registerEvent(Setup::commonSetup)
 
-        Registry.Items.registry.register(FMLJavaModLoadingContext.get().modEventBus)
-
+        AnimagusItems.registry.register(FMLJavaModLoadingContext.get().modEventBus)
     }
 }
 
