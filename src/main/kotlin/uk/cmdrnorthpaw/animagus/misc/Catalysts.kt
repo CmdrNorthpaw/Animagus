@@ -12,7 +12,7 @@ import net.minecraftforge.common.Tags
 import uk.cmdrnorthpaw.animagus.items.AnimagusItems
 
 object Catalysts {
-    enum class Tagged(type: EntityType<out LivingEntity>, vararg tags: ITag.INamedTag<Item>) {
+    enum class Tagged(val type: EntityType<out LivingEntity>, vararg val tags: ITag.INamedTag<Item>) {
         DOG(EntityType.WOLF, Tags.Items.BONES),
 
         COW(EntityType.COW, Tags.Items.LEATHER),
@@ -26,7 +26,7 @@ object Catalysts {
 
     }
 
-    enum class Static(type: EntityType<out LivingEntity>, vararg items: Item) {
+    enum class Static(val type: EntityType<out LivingEntity>, vararg val items: Item) {
         CAT(EntityType.CAT, AnimagusItems.CAT_HAIR.get()),
 
         SALMON(EntityType.SALMON, Items.SALMON),
