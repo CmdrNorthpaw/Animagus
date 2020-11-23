@@ -21,7 +21,8 @@ object Catalysts {
 
         IRON_GOLEM(EntityType.IRON_GOLEM, Tags.Items.STORAGE_BLOCKS_IRON),
 
-        RABBIT(EntityType.RABBIT, Tags.Items.CROPS_CARROT)
+        RABBIT(EntityType.RABBIT, Tags.Items.CROPS_CARROT),
+        LLAMA(EntityType.LLAMA, ItemTags.CARPETS),
 
     }
 
@@ -36,12 +37,16 @@ object Catalysts {
 
         PIG(EntityType.PIG, Items.APPLE, Items.GOLDEN_APPLE, Items.ENCHANTED_GOLDEN_APPLE),
         CHICKEN(EntityType.CHICKEN, Items.EGG),
+        HORSE(EntityType.HORSE, Items.SADDLE),
 
         PARROT(EntityType.PARROT, Items.COOKIE),
         PANDA(EntityType.PANDA, Items.BAMBOO, Items.CAKE),
 
-        SNOW_GOLEM(EntityType.SNOW_GOLEM, Items.SNOW, Items.SNOW_BLOCK, Items.SNOWBALL)
+        SNOW_GOLEM(EntityType.SNOW_GOLEM, Items.SNOW, Items.SNOW_BLOCK, Items.SNOWBALL),
 
+        FOX(EntityType.FOX, Items.MUTTON),
+        BEE(EntityType.BEE, Items.HONEYCOMB, Items.HONEY_BOTTLE, Items.HONEYCOMB_BLOCK, Items.HONEY_BLOCK),
 
+        VILLAGER(EntityType.VILLAGER, Items.EMERALD)
     }
 }
