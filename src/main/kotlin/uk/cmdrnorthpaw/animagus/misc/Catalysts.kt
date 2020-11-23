@@ -5,28 +5,43 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.passive.AnimalEntity
 import net.minecraft.item.Item
 import net.minecraft.item.Items
+import net.minecraft.tags.ITag
+import net.minecraft.tags.ItemTags
+import net.minecraft.tags.Tag
+import net.minecraftforge.common.Tags
 import uk.cmdrnorthpaw.animagus.items.AnimagusItems
 
-enum class Catalysts(type: EntityType<out LivingEntity>, vararg items: Item) {
-    CAT(EntityType.CAT, AnimagusItems.CAT_HAIR.get()),
-    DOG(EntityType.WOLF, Items.BONE),
+object Catalysts {
+    enum class Tagged(type: EntityType<out LivingEntity>, vararg tags: ITag.INamedTag<Item>) {
+        DOG(EntityType.WOLF, Tags.Items.BONES),
 
-    SALMON(EntityType.SALMON, Items.SALMON),
-    COD(EntityType.COD, Items.COD),
-    TROPICAL_FISH(EntityType.TROPICAL_FISH, Items.TROPICAL_FISH),
-    SQUID(EntityType.SQUID, Items.INK_SAC),
-    TURTLE(EntityType.TURTLE, Items.SCUTE),
+        COW(EntityType.COW, Tags.Items.LEATHER),
+        SHEEP(EntityType.SHEEP, ItemTags.WOOL),
+        CHICKEN(EntityType.CHICKEN, Tags.Items.FEATHERS),
 
-    CHICKEN(EntityType.CHICKEN, Items.EGG),
-    COW(EntityType.COW, Items.LEATHER),
-    PIG(EntityType.PIG, Items.APPLE),
-    SHEEP(EntityType.SHEEP, Items.WHITE_WOOL, Items.BROWN_WOOL, Items.BLUE_WOOL, Items.BLUE_WOOL, Items.LIGHT_BLUE_WOOL, Items.GRAY_WOOL, Items.LIGHT_GRAY_WOOL, Items.BLACK_WOOL, Items.CYAN_WOOL, Items.GREEN_WOOL, Items.ORANGE_WOOL, Items.LIME_WOOL, Items.RED_WOOL, Items.YELLOW_WOOL, Items.PURPLE_WOOL, Items.MAGENTA_WOOL, Items.PINK_WOOL),
+        IRON_GOLEM(EntityType.IRON_GOLEM, Tags.Items.STORAGE_BLOCKS_IRON),
 
-    PARROT(EntityType.PARROT, Items.COOKIE),
-    PANDA(EntityType.PANDA, Items.BAMBOO),
+        RABBIT(EntityType.RABBIT, Tags.Items.CROPS_CARROT)
 
-    SNOW_GOLEM(EntityType.SNOW_GOLEM, Items.SNOWBALL),
-    IRON_GOLEM(EntityType.IRON_GOLEM, Items.ANVIL),
+    }
 
-    RABBIT(EntityType.RABBIT, Items.GOLDEN_CARROT, Items.RABBIT_FOOT)
+    enum class Static(type: EntityType<out LivingEntity>, vararg items: Item) {
+        CAT(EntityType.CAT, AnimagusItems.CAT_HAIR.get()),
+
+        SALMON(EntityType.SALMON, Items.SALMON),
+        COD(EntityType.COD, Items.COD),
+        TROPICAL_FISH(EntityType.TROPICAL_FISH, Items.TROPICAL_FISH),
+        SQUID(EntityType.SQUID, Items.INK_SAC),
+        TURTLE(EntityType.TURTLE, Items.SCUTE),
+
+        PIG(EntityType.PIG, Items.APPLE, Items.GOLDEN_APPLE, Items.ENCHANTED_GOLDEN_APPLE),
+        CHICKEN(EntityType.CHICKEN, Items.EGG),
+
+        PARROT(EntityType.PARROT, Items.COOKIE),
+        PANDA(EntityType.PANDA, Items.BAMBOO, Items.CAKE),
+
+        SNOW_GOLEM(EntityType.SNOW_GOLEM, Items.SNOW, Items.SNOW_BLOCK, Items.SNOWBALL)
+
+
+    }
 }
