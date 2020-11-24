@@ -17,5 +17,6 @@ object AnimagusItems {
     val CAT_HAIR = registerItem("cat_hair", Item(Item.Properties().group(AnimagusCreativeTab)))
     val CHRYSALIS = registerItem("chrysalis", Item(Item.Properties().group(AnimagusCreativeTab)))
     val MANDRAKE_LEAF = registerItem("mandrake_leaf", MandrakeLeaf())
-    val PHIAL = registerItem("crystal_phial", CrystalPhial())
+
+    val ANIMAGUS_POTION = registerItem("animagus_potion", AnimagusPotion())
 }
