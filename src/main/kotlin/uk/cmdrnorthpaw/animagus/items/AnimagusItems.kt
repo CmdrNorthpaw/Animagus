@@ -18,5 +18,6 @@ object AnimagusItems {
     val CHRYSALIS = registerItem("chrysalis", Item(Item.Properties().group(AnimagusCreativeTab)))
     val MANDRAKE_LEAF = registerItem("mandrake_leaf", MandrakeLeaf())
 
+    val CRYSTAL_PHIAL = registerItem("crystal_phihal", CrystalPhial())
     val DEW_PHIAL = registerItem("dew_phial", Item(Item.Properties().group(AnimagusCreativeTab)))
 }
