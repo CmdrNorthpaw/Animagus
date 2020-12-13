@@ -10,7 +10,7 @@ class AnimagusItemModelProvider(generator: DataGenerator, helper: ExistingFileHe
     private val itemGenerated = getExistingFile(mcLoc("item/generated"))
 
     override fun registerModels() {
-        itemModelBuilder("crystal_phial")
+        itemModelBuilder("animagus:items/crystal_phial")
         itemModelBuilder("dew_phial")
     }
 

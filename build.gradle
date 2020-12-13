@@ -85,6 +85,8 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
+            forceExit false
+
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
             args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
@@ -106,6 +108,8 @@ dependencies {
 
     // Kotlin for Forge support
     implementation 'thedarkcolour:kotlinforforge:1.6.2'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10"
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
