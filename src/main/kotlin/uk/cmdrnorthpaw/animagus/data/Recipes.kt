@@ -1,5 +1,7 @@
 package uk.cmdrnorthpaw.animagus.data
 
+import net.minecraft.advancements.criterion.InventoryChangeTrigger
+import net.minecraft.block.Blocks
 import net.minecraft.data.*
 import net.minecraft.data.DataGenerator
 import net.minecraftforge.common.Tags
@@ -18,10 +20,11 @@ class AnimagusRecipeHandler(generator: DataGenerator) : RecipeProvider(generator
     object Recipes {
         private const val modid = Animagus.MODID
         val crystalPhial: ShapedRecipeBuilder = ShapedRecipeBuilder.shapedRecipe(AnimagusItems.CRYSTAL_PHIAL.get())
-                .patternLine(" x ")
-                .patternLine(" x ")
-                .patternLine(" x ")
-                .key('x', Tags.Items.GLASS)
-                .setGroup(modid)
+            .patternLine(" x ")
+            .patternLine(" x ")
+            .patternLine(" x ")
+            .key('x', Tags.Items.GLASS)
+            .setGroup(modid)
+            .addCriterion("glass", InventoryChangeTrigger.Instance.forItems(Blocks.GLASS))
     }
 }
