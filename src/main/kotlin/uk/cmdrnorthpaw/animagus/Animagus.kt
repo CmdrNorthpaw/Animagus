@@ -7,6 +7,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext
 import org.apache.logging.log4j.LogManager
 import thedarkcolour.kotlinforforge.KotlinModLoadingContext
+import thedarkcolour.kotlinforforge.forge.MOD_BUS
+import uk.cmdrnorthpaw.animagus.data.DataGenerators
+import uk.cmdrnorthpaw.animagus.events.DropCatHair
 import uk.cmdrnorthpaw.animagus.items.AnimagusItems
 import java.util.function.Consumer
 
@@ -19,15 +22,16 @@ object Animagus {
         registerEvent(Setup::clientSetup)
         registerEvent(Setup::commonSetup)
 
-        AnimagusItems.registry.register(KotlinModLoadingContext.get().getKEventBus())
+        registerEvent(DataGenerators::gatherData)
+        registerEvent(DropCatHair::dropCatHair)
+
+        AnimagusItems.registry.register(MOD_BUS)
     }
 }
 
-fun <T: Event> registerEvent(event: Consumer<T>) = KotlinModLoadingContext.get().getKEventBus().register(event)
-
+fun <T: Event> registerEvent(event: Consumer<T>) = MOD_BUS.addListener(event)
 private object Setup {
     fun clientSetup(event: FMLClientSetupEvent) {
-        TODO()
     }
 
     fun commonSetup(event: FMLCommonSetupEvent) {
