@@ -35,6 +35,5 @@ private object Setup {
     }
 
     fun commonSetup(event: FMLCommonSetupEvent) {
-        TODO()
     }
 }

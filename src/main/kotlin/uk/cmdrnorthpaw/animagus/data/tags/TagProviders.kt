@@ -21,7 +21,7 @@ class ItemTagProvider(generator: DataGenerator, helper: ExistingFileHelper) : It
         }
 
         for (value in Catalysts.Tagged.values()) {
-            value.tags.forEach { tag -> tag.allElements.forEach { catalystBuilder.add(it) } }
+            value.tags.forEach { tag -> catalystBuilder.addTag(tag) }
         }
     }
 }

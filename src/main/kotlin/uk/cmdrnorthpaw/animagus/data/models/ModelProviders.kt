@@ -11,7 +11,7 @@ class AnimagusItemModelProvider(generator: DataGenerator, helper: ExistingFileHe
 
     override fun registerModels() {
         itemModelBuilder("animagus:items/crystal_phial")
-        itemModelBuilder("dew_phial")
+        itemModelBuilder("items/dew_phial")
     }
 
     private fun itemModelBuilder(name: String): ItemModelBuilder = getBuilder(name).parent(itemGenerated).texture("layer0", name)
