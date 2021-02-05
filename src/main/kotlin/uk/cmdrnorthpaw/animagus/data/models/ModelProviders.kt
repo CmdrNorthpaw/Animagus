@@ -10,9 +10,9 @@ class AnimagusItemModelProvider(generator: DataGenerator, helper: ExistingFileHe
     private val itemGenerated = getExistingFile(mcLoc("item/generated"))
 
     override fun registerModels() {
-        itemModelBuilder("animagus:items/crystal_phial")
-        itemModelBuilder("items/dew_phial")
+        itemModelBuilder("crystal_phial")
+        itemModelBuilder("dew_phial")
     }
 
-    private fun itemModelBuilder(name: String): ItemModelBuilder = getBuilder(name).parent(itemGenerated).texture("layer0", name)
+    private fun itemModelBuilder(name: String): ItemModelBuilder = getBuilder(name).parent(itemGenerated).texture("layer0", "item/$name")
 }
