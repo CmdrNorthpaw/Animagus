@@ -1,18 +1,14 @@
-package uk.cmdrnorthpaw.animagus.player
+package uk.cmdrnorthpaw.animagus.capability
 
 import net.minecraft.entity.*
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.nbt.CompoundNBT
 import net.minecraft.nbt.INBT
-import net.minecraft.nbt.NBTTypes
-import net.minecraft.nbt.NBTUtil
 import net.minecraft.util.Direction
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.common.capabilities.Capability
-import net.minecraftforge.common.capabilities.ICapabilityProvider
 import net.minecraftforge.common.capabilities.ICapabilitySerializable
 import net.minecraftforge.common.util.LazyOptional
-import net.minecraftforge.common.util.NonNullSupplier
 import net.minecraftforge.event.AttachCapabilitiesEvent
 import net.minecraftforge.event.entity.player.PlayerEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
@@ -20,7 +16,6 @@ import uk.cmdrnorthpaw.animagus.Animagus
 import uk.cmdrnorthpaw.animagus.misc.Capabilities
 import uk.cmdrnorthpaw.animagus.model.IAnimagusCapability
 import java.util.concurrent.Callable
-import java.util.logging.LogManager
 
 class AnimagusCapability : IAnimagusCapability {
     override var isInAnimagusForm: Boolean = false
