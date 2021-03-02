@@ -11,6 +11,7 @@ import thedarkcolour.kotlinforforge.forge.MOD_BUS
 import uk.cmdrnorthpaw.animagus.data.DataGenerators
 import uk.cmdrnorthpaw.animagus.events.DropCatHair
 import uk.cmdrnorthpaw.animagus.items.AnimagusItems
+import uk.cmdrnorthpaw.animagus.misc.Catalysts
 import java.util.function.Consumer
 
 @Mod(Animagus.MODID)
@@ -24,6 +25,7 @@ object Animagus {
 
         registerEvent(DataGenerators::gatherData)
         registerEvent(DropCatHair::dropCatHair)
+        registerEvent(Catalysts::registerInternalCatalysts)
 
         AnimagusItems.registry.register(MOD_BUS)
     }
