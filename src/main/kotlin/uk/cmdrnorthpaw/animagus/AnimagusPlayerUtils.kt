@@ -23,7 +23,7 @@ object AnimagusPlayerUtils {
             if (capability.isInAnimagusForm || !capability.isAnimagus) return@ifPresent
              val form = capability.animagusForm
 
-            form?.let { morph(form) }
+            form?.let { morph(form); capability.isInAnimagusForm = true }
         }
     }
 
@@ -49,8 +49,9 @@ object AnimagusPlayerUtils {
     fun PlayerEntity.toPlayer() {
         getCapability(Capabilities.ANIMAGUS).ifPresent { capability ->
             if (!capability.isInAnimagusForm) return@ifPresent
-
             morph()
+
+            capability.isInAnimagusForm = false
         }
     }
 
