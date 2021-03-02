@@ -19,7 +19,7 @@ import java.util.concurrent.Callable
 
 class AnimagusCapability : IAnimagusCapability {
     override var isInAnimagusForm: Boolean = false
-    override var animagusForm: EntityType<out MobEntity>? = null
+    override var animagusForm: EntityType<*>? = null
         set(value) = if (animagusForm == null) field = value else Unit
     override var isAnimagus: Boolean = false
         set(value) = if (!isAnimagus && value) field = value else Unit
@@ -35,7 +35,7 @@ class AnimagusCapability : IAnimagusCapability {
             if (animagusFormOptional.isPresent && animagusFormOptional.get().isType<EntityType<out MobEntity>>()) {
                 instance?.isInAnimagusForm = isInAnimagusForm
                 instance?.isAnimagus = isAnimagus
-                instance?.animagusForm = animagusFormOptional.get() as EntityType<out MobEntity>
+                instance?.animagusForm = animagusFormOptional.get()
             } else Animagus.logger.error("Bad EntityType read from NBT!")
         }
 

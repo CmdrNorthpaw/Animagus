@@ -9,5 +9,5 @@ interface IAnimagusCapability {
 
     var isAnimagus: Boolean
 
-    var animagusForm: EntityType<out MobEntity>?
+    var animagusForm: EntityType<*>?
 }

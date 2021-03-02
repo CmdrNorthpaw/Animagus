@@ -8,6 +8,7 @@ import net.minecraft.network.IPacket
 import net.minecraft.server.management.PlayerList
 import net.minecraft.world.World
 import com.mojang.datafixers.util.Pair
+import net.minecraft.entity.MobEntity
 import net.minecraft.network.play.server.*
 import net.minecraft.util.*
 import uk.cmdrnorthpaw.animagus.misc.Capabilities
@@ -22,13 +23,20 @@ object AnimagusPlayerUtils {
         val playerList = this.server?.playerList
         val disguiseEntity = capability.animagusForm?.create(world)
 
+        if (disguiseEntity !is MobEntity) {
+            Animagus.logger.error("Player ${name.unformattedComponentText} attempted to morph into not a mob! This is *not* allowed")
+            return@ifPresent
+        }
+
         playerList?.sendPacketToDimension(SDestroyEntitiesPacket(entityId), worldKey)
         playerList?.sendPacketToDimension(SSpawnObjectPacket(disguiseEntity), worldKey)
-        playerList?.sendPacketToDimension(SEntityMetadataPacket(entityId, disguiseEntity?.dataManager, true), worldKey)
+        playerList?.sendPacketToDimension(SEntityMetadataPacket(entityId, disguiseEntity.dataManager, true), worldKey)
         playerList?.sendPacketToDimension(SEntityEquipmentPacket(entityId, getEquipment(this)), worldKey)
         playerList?.sendPacketToDimension(SEntityHeadLookPacket(disguiseEntity, (getRotationYawHead() * 256F / 360F).toInt().toByte()), worldKey)
 
         this.world.playSound(null, posX, posY, posZ, SoundEvents.ENTITY_GUARDIAN_AMBIENT, SoundCategory.PLAYERS, 1F, 2F)
+
+        capability.isInAnimagusForm = true
     }
 
     private fun getEquipment(entity: LivingEntity): List<Pair<EquipmentSlotType, ItemStack>> {
