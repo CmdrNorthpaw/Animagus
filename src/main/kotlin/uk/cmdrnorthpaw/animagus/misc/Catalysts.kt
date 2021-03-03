@@ -2,6 +2,7 @@ package uk.cmdrnorthpaw.animagus.misc
 
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.MobEntity
 import net.minecraft.entity.passive.AnimalEntity
 import net.minecraft.item.Item
 import net.minecraft.item.Items
@@ -9,7 +10,9 @@ import net.minecraft.tags.ITag
 import net.minecraft.tags.ItemTags
 import net.minecraft.tags.Tag
 import net.minecraftforge.common.Tags
+import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
+import uk.cmdrnorthpaw.animagus.Animagus
 import uk.cmdrnorthpaw.animagus.items.AnimagusItems
 import uk.cmdrnorthpaw.animagus.model.Catalyst
 import uk.cmdrnorthpaw.animagus.model.Catalyst.Companion.asCatalystFor
@@ -18,10 +21,31 @@ import java.util.function.Predicate
 private val internalCatalysts: MutableList<Catalyst> = mutableListOf()
 
 object Catalysts : List<Catalyst> by internalCatalysts {
-    fun register(element: Catalyst) = internalCatalysts.add(element)
-    fun registerAll(vararg elements: Catalyst) = internalCatalysts.addAll(elements)
+    private val allItems = mutableListOf<Item>()
+
+    fun register(element: Catalyst) {
+        val elementItems = mutableListOf(*element.items)
+        element.items.forEachIndexed { index, item ->
+            if (allItems.contains(item)) {
+                Animagus.logger.warn("Item ${item.registryName} has already been registered as a Catalyst. Disabling.")
+                elementItems.removeAt(index)
+            }
+        }
+
+        allItems.addAll(elementItems)
+
+        internalCatalysts.add(
+            object : Catalyst {
+                override val entity: EntityType<out MobEntity> = element.entity
+                override val items: Array<Item> = elementItems.toTypedArray()
+            }
+        )
+    }
+
+    fun registerAll(vararg elements: Catalyst) = elements.forEach { register(it) }
 
     @JvmStatic
+    @SubscribeEvent
     internal fun registerInternalCatalysts(event: FMLClientSetupEvent) {
         register(Tags.Items.BONES.asCatalystFor(EntityType.WOLF))
         register(AnimagusItems.CAT_HAIR.get().asCatalystFor(EntityType.CAT))
