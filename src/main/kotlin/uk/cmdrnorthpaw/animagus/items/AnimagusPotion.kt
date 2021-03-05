@@ -3,6 +3,7 @@ package uk.cmdrnorthpaw.animagus.items
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.player.ServerPlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.potion.PotionUtils
@@ -15,6 +16,8 @@ import net.minecraft.util.text.Style
 import net.minecraft.util.text.TranslationTextComponent
 import net.minecraft.world.World
 import net.minecraftforge.event.world.NoteBlockEvent
+import net.minecraftforge.fml.network.NetworkHooks
+import uk.cmdrnorthpaw.animagus.gui.AnimagusPotionContainer
 import uk.cmdrnorthpaw.animagus.misc.AnimagusCreativeTab
 import uk.cmdrnorthpaw.animagus.misc.Capabilities
 
@@ -32,7 +35,12 @@ class AnimagusPotion : Item(Properties()
     }
 
     override fun onItemRightClick(worldIn: World, playerIn: PlayerEntity, handIn: Hand): ActionResult<ItemStack> {
-        return DrinkHelper.startDrinking(worldIn, playerIn, handIn)
+        if (!playerIn.isSneaking) return DrinkHelper.startDrinking(worldIn, playerIn, handIn)
+
+        return if (!worldIn.isRemote) {
+            NetworkHooks.openGui(playerIn as ServerPlayerEntity, AnimagusPotionContainer.provider)
+            ActionResult.resultSuccess(playerIn.getHeldItem(handIn))
+        } else ActionResult.resultPass(playerIn.getHeldItem(handIn))
     }
 
     override fun onItemUseFinish(stack: ItemStack, worldIn: World, entityLiving: LivingEntity): ItemStack {
