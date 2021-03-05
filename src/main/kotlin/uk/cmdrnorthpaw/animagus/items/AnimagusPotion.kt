@@ -10,10 +10,7 @@ import net.minecraft.potion.PotionUtils
 import net.minecraft.util.ActionResult
 import net.minecraft.util.DrinkHelper
 import net.minecraft.util.Hand
-import net.minecraft.util.text.Color
-import net.minecraft.util.text.ITextComponent
-import net.minecraft.util.text.Style
-import net.minecraft.util.text.TranslationTextComponent
+import net.minecraft.util.text.*
 import net.minecraft.world.World
 import net.minecraftforge.event.world.NoteBlockEvent
 import net.minecraftforge.fml.network.NetworkHooks
@@ -63,10 +60,20 @@ class AnimagusPotion : Item(Properties()
         return style
     }
 
+    private fun coloredTooltip(key: String, hex: String): IFormattableTextComponent {
+        val style = Style.EMPTY
+        style.color = Color.fromHex(hex)
+        return TranslationTextComponent(item.translationKey).mergeStyle(style)
+    }
+
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<ITextComponent>, flagIn: ITooltipFlag) {
         val nbt = stack.serializeNBT()
         if (nbt.getBoolean("hasMandrake")) {
-            tooltip.add(TranslationTextComponent(AnimagusItems.MANDRAKE_LEAF.get().translationKey).mergeStyle(coloredText(Color.fromHex("4dc322")!!)))
+            tooltip.add(coloredTooltip(AnimagusItems.MANDRAKE_LEAF.get().translationKey, "4dc322"))
         }
+        if (nbt.getBoolean("hasHair")) tooltip.add(coloredTooltip(AnimagusItems.PLAYER_HAIR.get().translationKey, "753b00"))
+        if (nbt.getBoolean("hasDew")) tooltip.add(coloredTooltip(AnimagusItems.DEW_PHIAL.get().translationKey, "74e2da"))
+        if (nbt.getBoolean("hasChrysalis")) tooltip.add(coloredTooltip(AnimagusItems.CHRYSALIS.get().translationKey, "e03c00"))
+        if (nbt.getBoolean("hasCatalyst")) tooltip.add(coloredTooltip("animagus.catalyst", "d1000e"))
     }
 }
