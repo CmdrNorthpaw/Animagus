@@ -9,12 +9,16 @@ import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TranslationTextComponent
 import net.minecraftforge.items.wrapper.InvWrapper
 
-class AnimagusPotionContainer(windowId: Int, playerInventory: PlayerInventory) : Container(AnimagusContainers.POTION.get(), windowId) {
+class AnimagusPotionContainer(windowId: Int, playerInventory: PlayerInventory, private val stack: ItemStack) : Container(AnimagusContainers.POTION.get(), windowId) {
     override fun canInteractWith(playerIn: PlayerEntity): Boolean {
         return true
     }
 
     val playerInventory = InvWrapper(playerInventory)
+
+    override fun onContainerClosed(playerIn: PlayerEntity) {
+
+    }
 
 
     private object Slots {
@@ -29,11 +33,12 @@ class AnimagusPotionContainer(windowId: Int, playerInventory: PlayerInventory) :
     }
 
     companion object {
-        val provider = object : INamedContainerProvider {
-            override fun createMenu(p_createMenu_1_: Int, p_createMenu_2_: PlayerInventory, p_createMenu_3_: PlayerEntity): Container {
-                return AnimagusPotionContainer(p_createMenu_1_, p_createMenu_2_)
+        fun getProvider(stack: ItemStack) = object : INamedContainerProvider {
+            override fun createMenu(p_createMenu_1_: Int, p_createMenu_2_: PlayerInventory, p_createMenu_3_: PlayerEntity): Container? {
+                return AnimagusPotionContainer(p_createMenu_1_, p_createMenu_2_, stack)
             }
-            override fun getDisplayName(): ITextComponent = TranslationTextComponent("animagus.gui.potion_container")
+
+            override fun getDisplayName(): ITextComponent = TranslationTextComponent("animagus.gui.potion")
         }
     }
 }

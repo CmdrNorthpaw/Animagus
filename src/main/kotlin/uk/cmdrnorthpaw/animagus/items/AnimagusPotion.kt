@@ -27,6 +27,7 @@ class AnimagusPotion : Item(Properties()
         if (entity.isSneaking) {
             stack.count--
             entity.inventory.addItemStackToInventory(ItemStack(AnimagusItems.CRYSTAL_PHIAL.get(), 1))
+            return true
         }
         return false
     }
@@ -35,7 +36,7 @@ class AnimagusPotion : Item(Properties()
         if (!playerIn.isSneaking) return DrinkHelper.startDrinking(worldIn, playerIn, handIn)
 
         return if (!worldIn.isRemote) {
-            NetworkHooks.openGui(playerIn as ServerPlayerEntity, AnimagusPotionContainer.provider)
+            NetworkHooks.openGui(playerIn as ServerPlayerEntity, AnimagusPotionContainer.getProvider(playerIn.getHeldItem(handIn)))
             ActionResult.resultSuccess(playerIn.getHeldItem(handIn))
         } else ActionResult.resultPass(playerIn.getHeldItem(handIn))
     }
