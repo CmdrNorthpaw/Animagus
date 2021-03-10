@@ -17,7 +17,15 @@ class AnimagusPotionContainer(windowId: Int, playerInventory: PlayerInventory, p
     val playerInventory = InvWrapper(playerInventory)
 
     override fun onContainerClosed(playerIn: PlayerEntity) {
+        val nbt = stack.serializeNBT()
 
+        nbt.putBoolean("hasMandrake", getSlot(Slots.MANDRAKE).hasStack)
+        nbt.putBoolean("hasHair", getSlot(Slots.HAIR).hasStack)
+        nbt.putBoolean("hasDew", getSlot(Slots.DEW).hasStack)
+        nbt.putBoolean("hasChrysalis", getSlot(Slots.CHRYSALIS).hasStack)
+        nbt.putBoolean("hasCatalyst", getSlot(Slots.CATALYST).hasStack)
+
+        stack.deserializeNBT(nbt)
     }
 
 
