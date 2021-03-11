@@ -29,7 +29,7 @@ class AnimagusPotionContainer(windowId: Int, playerInventory: PlayerInventory, p
     }
 
 
-    private object Slots {
+    object Slots {
         const val MANDRAKE = 0
         const val HAIR = 1
         const val DEW = 2

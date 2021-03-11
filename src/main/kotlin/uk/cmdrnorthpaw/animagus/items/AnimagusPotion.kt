@@ -12,8 +12,12 @@ import net.minecraft.util.DrinkHelper
 import net.minecraft.util.Hand
 import net.minecraft.util.text.*
 import net.minecraft.world.World
+import net.minecraftforge.common.util.LazyOptional
 import net.minecraftforge.event.world.NoteBlockEvent
 import net.minecraftforge.fml.network.NetworkHooks
+import net.minecraftforge.items.CapabilityItemHandler
+import net.minecraftforge.items.IItemHandler
+import net.minecraftforge.items.ItemStackHandler
 import uk.cmdrnorthpaw.animagus.gui.AnimagusPotionContainer
 import uk.cmdrnorthpaw.animagus.misc.AnimagusCreativeTab
 import uk.cmdrnorthpaw.animagus.misc.Capabilities
@@ -22,6 +26,20 @@ class AnimagusPotion : Item(Properties()
     .maxStackSize(1)
     .group(AnimagusCreativeTab))
 {
+    val itemHandler = object : ItemStackHandler(41) {
+        override fun isItemValid(slot: Int, stack: ItemStack): Boolean {
+            if (slot == AnimagusPotionContainer.Slots.MANDRAKE && stack.item == AnimagusItems.MANDRAKE_LEAF.get()) return true
+            if (slot == AnimagusPotionContainer.Slots.DEW && stack.item == AnimagusItems.MANDRAKE_LEAF.get()) return true
+            if (slot == AnimagusPotionContainer.Slots.HAIR && stack.item == AnimagusItems.PLAYER_HAIR.get()) return true
+            if (slot == AnimagusPotionContainer.Slots.CHRYSALIS && stack.item == AnimagusItems.CHRYSALIS.get()) return true
+            if (slot == AnimagusPotionContainer.Slots.CATALYST && stack.getCapability(Capabilities.CATALYST).isPresent) return true
+
+            return false
+        }
+    }
+
+    val itemHandlerOptional: LazyOptional<ItemStackHandler> = LazyOptional.of { itemHandler }
+
     override fun onEntitySwing(stack: ItemStack?, entity: LivingEntity?): Boolean {
         if (entity !is PlayerEntity || stack == null) return false
         if (entity.isSneaking) {
@@ -68,13 +86,14 @@ class AnimagusPotion : Item(Properties()
     }
 
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<ITextComponent>, flagIn: ITooltipFlag) {
-        val nbt = stack.serializeNBT()
-        if (nbt.getBoolean("hasMandrake")) {
-            tooltip.add(coloredTooltip(AnimagusItems.MANDRAKE_LEAF.get().translationKey, "4dc322"))
+        stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent { handler ->
+            val hasStack = { slot: Int -> handler.getStackInSlot(slot).isEmpty }
+
+            if (hasStack(AnimagusPotionContainer.Slots.MANDRAKE)) tooltip.add(coloredTooltip(AnimagusItems.MANDRAKE_LEAF.get().translationKey, "4dc322"))
+            if (hasStack(AnimagusPotionContainer.Slots.HAIR)) tooltip.add(coloredTooltip(AnimagusItems.PLAYER_HAIR.get().translationKey, "753b00"))
+            if (hasStack(AnimagusPotionContainer.Slots.DEW)) tooltip.add(coloredTooltip(AnimagusItems.DEW_PHIAL.get().translationKey, "74e2da"))
+            if (hasStack(AnimagusPotionContainer.Slots.CHRYSALIS)) tooltip.add(coloredTooltip(AnimagusItems.CHRYSALIS.get().translationKey, "e03c00"))
+            if (hasStack(AnimagusPotionContainer.Slots.CATALYST)) tooltip.add(coloredTooltip("animagus.catalyst", "d1000e"))
         }
-        if (nbt.getBoolean("hasHair")) tooltip.add(coloredTooltip(AnimagusItems.PLAYER_HAIR.get().translationKey, "753b00"))
-        if (nbt.getBoolean("hasDew")) tooltip.add(coloredTooltip(AnimagusItems.DEW_PHIAL.get().translationKey, "74e2da"))
-        if (nbt.getBoolean("hasChrysalis")) tooltip.add(coloredTooltip(AnimagusItems.CHRYSALIS.get().translationKey, "e03c00"))
-        if (nbt.getBoolean("hasCatalyst")) tooltip.add(coloredTooltip("animagus.catalyst", "d1000e"))
     }
 }
