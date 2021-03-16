@@ -21,4 +21,6 @@ object AnimagusItems {
 
     val CRYSTAL_PHIAL = registerItem("crystal_phial", CrystalPhial())
     val DEW_PHIAL = registerItem("dew_phial", Item(Item.Properties().group(AnimagusCreativeTab)))
+
+    val ANIMAGUS_POTION = registerItem("animagus_potion", AnimagusPotion())
 }

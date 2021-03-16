@@ -10,14 +10,17 @@ import net.minecraft.potion.PotionUtils
 import net.minecraft.util.ActionResult
 import net.minecraft.util.DrinkHelper
 import net.minecraft.util.Hand
+import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.*
 import net.minecraft.world.World
 import net.minecraftforge.common.util.LazyOptional
+import net.minecraftforge.event.AttachCapabilitiesEvent
 import net.minecraftforge.event.world.NoteBlockEvent
 import net.minecraftforge.fml.network.NetworkHooks
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.IItemHandler
 import net.minecraftforge.items.ItemStackHandler
+import uk.cmdrnorthpaw.animagus.Animagus
 import uk.cmdrnorthpaw.animagus.gui.AnimagusPotionContainer
 import uk.cmdrnorthpaw.animagus.misc.AnimagusCreativeTab
 import uk.cmdrnorthpaw.animagus.misc.Capabilities

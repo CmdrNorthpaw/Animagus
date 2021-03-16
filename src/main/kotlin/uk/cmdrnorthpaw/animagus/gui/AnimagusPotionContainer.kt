@@ -7,6 +7,8 @@ import net.minecraft.inventory.container.INamedContainerProvider
 import net.minecraft.item.ItemStack
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TranslationTextComponent
+import net.minecraftforge.items.CapabilityItemHandler
+import net.minecraftforge.items.SlotItemHandler
 import net.minecraftforge.items.wrapper.InvWrapper
 
 class AnimagusPotionContainer(windowId: Int, playerInventory: PlayerInventory, private val stack: ItemStack) : Container(AnimagusContainers.POTION.get(), windowId) {
